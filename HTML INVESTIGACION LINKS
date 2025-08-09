@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Investigación de Links - Estilo Hacker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+  /* Fondo con textura sutil */
+  body {
+    background-color: #0d1117;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-position: 0 0, 25px 25px;
+    background-size: 50px 50px;
+    color: #39ff14;
+    font-family: 'Source Code Pro', monospace;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Logo ACH-033 */
+  #logo {
+    font-family: 'Source Code Pro', monospace;
+    color: #39ff14;
+    text-shadow:
+      0 0 5px #39ff14,
+      0 0 10px #00ff00,
+      0 0 20px #00ff00;
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    user-select: none;
+  }
+
+  /* Título con brillo animado */
+  h1 {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+    color: #39ff14;
+    text-shadow:
+      0 0 8px #39ff14,
+      0 0 20px #39ff14,
+      0 0 30px #00ff00,
+      0 0 40px #00ff00,
+      0 0 50px #00ff00,
+      0 0 60px #00ff00;
+    animation: flicker 3s infinite alternate;
+  }
+
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      text-shadow:
+        0 0 8px #39ff14,
+        0 0 20px #39ff14,
+        0 0 30px #00ff00,
+        0 0 40px #00ff00,
+        0 0 50px #00ff00,
+        0 0 60px #00ff00;
+      opacity: 1;
+    }
+    20%, 22%, 24%, 55% {
+      text-shadow: none;
+      opacity: 0.8;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-align: left;
+  }
+
+  li {
+    margin: 10px 0;
+  }
+
+  /* Botones estilo glitch */
+  button {
+    background-color: transparent;
+    border: 1.5px solid #39ff14;
+    color: #39ff14;
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Source Code Pro', monospace;
+    transition: background-color 0.25s, color 0.25s;
+    width: 100%;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  button:hover, button:focus {
+    background-color: #39ff14;
+    color: #0d1117;
+    outline: none;
+    animation: glitch 0.5s linear infinite;
+  }
+  @keyframes glitch {
+    0% {
+      text-shadow: 2px 0 red;
+    }
+    20% {
+      text-shadow: -2px 0 cyan;
+    }
+    40% {
+      text-shadow: 2px 0 lime;
+    }
+    60% {
+      text-shadow: -2px 0 magenta;
+    }
+    80% {
+      text-shadow: 2px 0 yellow;
+    }
+    100% {
+      text-shadow: none;
+    }
+  }
+
+  .descripcion {
+    background-color: #010409;
+    border: 1.5px solid #39ff14;
+    padding: 20px;
+    font-size: 15px;
+    white-space: pre-line;
+    line-height: 1.5;
+    border-radius: 6px;
+    text-align: left;
+    min-height: 220px;
+    position: relative;
+    font-family: 'Source Code Pro', monospace;
+    overflow-wrap: break-word;
+  }
+
+  a {
+    color: #39ff14;
+    text-decoration: underline;
+  }
+  a:hover {
+    color: #8cff66;
+  }
+  code {
+    background-color: #021214;
+    color: #39ff14;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+
+  /* Cursor parpadeante tipo terminal */
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    background-color: #39ff14;
+    margin-left: 2px;
+    animation: blink 1s steps(2, start) infinite;
+  }
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  /* Animación de escritura */
+  .typing {
+    border-right: 2px solid #39ff14;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    animation: typing 1.5s steps(40, end);
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div id="logo">ACH-033</div>
+  <h1>INVESTIGACIÓN DE LINKS <span class="cursor"></span></h1>
+
+  <ul>
+    <li><button onclick="mostrar(1)">1. WHOIS - Saber quién está detrás del dominio</button></li>
+    <li><button onclick="mostrar(2)">2. DNS - Ver a qué dirección IP apunta el dominio</button></li>
+    <li><button onclick="mostrar(3)">3. ANÁLISIS VISUAL - Ver cómo es la web sin entrar directamente</button></li>
+    <li><button onclick="mostrar(4)">4. ANÁLISIS DE REPUTACIÓN – ¿Está reportada por otros?</button></li>
+    <li><button onclick="mostrar(5)">5. INVESTIGACIÓN PROFUNDA - Qué servicios expone, qué más hay detrás</button></li>
+  </ul>
+
+  <div id="contenido" class="descripcion">
+    <p>Selecciona un número para ver la descripción y enlaces.</p>
+  </div>
+</div>
+
+<script>
+  const apartados = {
+    1: {
+      titulo: "1. WHOIS - Saber quién está detrás del dominio",
+      texto: `<strong>Herramientas:</strong>
+- <a href="https://who.is" target="_blank" rel="noopener">https://who.is</a>
+- <a href="https://lnkd.in/dpmuJKCs" target="_blank" rel="noopener">https://lnkd.in/dpmuJKCs</a>
+- <a href="https://whoxy.com" target="_blank" rel="noopener">https://whoxy.com</a>
+
+Comando <code>whois dominio.com</code> en terminal
+
+<strong>¿Qué puedes ver?</strong>
+- Fecha de creación del dominio
+- Registro
+- Datos del propietario (si no están ocultos)
+- Ubicación del registro`
+    },
+    2: {
+      titulo: "2. DNS - Ver a qué dirección IP apunta el dominio",
+      texto: `<strong>Herramientas:</strong>
+- <code>nslookup dominio.com</code>
+- <a href="https://dnsdumpster.com" target="_blank" rel="noopener">https://dnsdumpster.com</a>
+- <a href="https://securitytrails.com" target="_blank" rel="noopener">https://securitytrails.com</a>
+
+<strong>¿Qué puedes obtener?</strong>
+- Dirección IP
+- Subdominios
+- Cambios recientes en los DNS
+- Proveedor de alojamiento o CDN`
+    },
+    3: {
+      titulo: "3. ANÁLISIS VISUAL - Ver cómo es la web sin entrar directamente",
+      texto: `<strong>Herramientas:</strong>
+- <a href="https://urlscan.io" target="_blank" rel="noopener">https://urlscan.io</a>
+- <a href="https://web.archive.org" target="_blank" rel="noopener">https://web.archive.org</a>
+
+<strong>¿Qué puedes ver?</strong>
+- Capturas de pantalla
+- Códigos de seguimiento
+- Scripts activos
+- Recursos externos`
+    },
+    4: {
+      titulo: "4. ANÁLISIS DE REPUTACIÓN – ¿Está reportada por otros?",
+      texto: `<strong>Herramientas:</strong>
+- <a href="https://www.virustotal.com" target="_blank" rel="noopener">https://www.virustotal.com</a>
+- <a href="https://urlhaus.abuse.ch" target="_blank" rel="noopener">https://urlhaus.abuse.ch</a>
+- <a href="https://phishtank.org" target="_blank" rel="noopener">https://phishtank.org</a>
+
+<strong>¿Qué puedes comprobar?</strong>
+- Si el dominio está en listas negras
+- Si ha sido detectado por motores de antivirus como malicioso
+- Si ya fue reportado como phishing`
+    },
+    5: {
+      titulo: "5. INVESTIGACIÓN PROFUNDA - Qué servicios expone, qué más hay detrás",
+      texto: `<strong>Herramientas:</strong>
+- <a href="https://shodan.io" target="_blank" rel="noopener">https://shodan.io</a>
+- <a href="https://censys.io" target="_blank" rel="noopener">https://censys.io</a>
+- <a href="https://crt.sh" target="_blank" rel="noopener">https://crt.sh</a>
+
+<strong>¿Qué puedes descubrir?</strong>
+- Qué puertos tiene abiertos
+- Certificados SSL asociados
+- Otras webs que usan el mismo servidor
+- Si el servidor está mal configurado`
+    }
+  };
+
+  function mostrar(num) {
+    const contenido = document.getElementById("contenido");
+    if (apartados[num]) {
+      contenido.innerHTML = `<h2>${apartados[num].titulo}</h2><pre class="typing">${apartados[num].texto}</pre>`;
+    } else {
+      contenido.innerHTML = "<p>Selecciona un número válido.</p>";
+    }
+  }
+</script>
+
+</body>
+</html>
