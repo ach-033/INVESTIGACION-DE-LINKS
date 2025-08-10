@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Link Investigation - Hacker Style</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+  body {
+    background-color: #0d1117;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-position: 0 0, 25px 25px;
+    background-size: 50px 50px;
+    color: #39ff14;
+    font-family: 'Source Code Pro', monospace;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+  }
+
+  #logo {
+    font-family: 'Source Code Pro', monospace;
+    color: #39ff14;
+    text-shadow:
+      0 0 5px #39ff14,
+      0 0 10px #00ff00,
+      0 0 20px #00ff00;
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    user-select: none;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+    color: #39ff14;
+    text-shadow:
+      0 0 8px #39ff14,
+      0 0 20px #39ff14,
+      0 0 30px #00ff00,
+      0 0 40px #00ff00,
+      0 0 50px #00ff00,
+      0 0 60px #00ff00;
+    animation: flicker 3s infinite alternate;
+  }
+
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      text-shadow:
+        0 0 8px #39ff14,
+        0 0 20px #39ff14,
+        0 0 30px #00ff00,
+        0 0 40px #00ff00,
+        0 0 50px #00ff00,
+        0 0 60px #00ff00;
+      opacity: 1;
+    }
+    20%, 22%, 24%, 55% {
+      text-shadow: none;
+      opacity: 0.8;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-align: left;
+  }
+
+  li {
+    margin: 10px 0;
+  }
+
+  button {
+    background-color: transparent;
+    border: 1.5px solid #39ff14;
+    color: #39ff14;
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Source Code Pro', monospace;
+    transition: background-color 0.25s, color 0.25s;
+    width: 100%;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  button:hover, button:focus {
+    background-color: #39ff14;
+    color: #0d1117;
+    outline: none;
+    animation: glitch 0.5s linear infinite;
+  }
+  @keyframes glitch {
+    0% { text-shadow: 2px 0 red; }
+    20% { text-shadow: -2px 0 cyan; }
+    40% { text-shadow: 2px 0 lime; }
+    60% { text-shadow: -2px 0 magenta; }
+    80% { text-shadow: 2px 0 yellow; }
+    100% { text-shadow: none; }
+  }
+
+  .descripcion {
+    background-color: #010409;
+    border: 1.5px solid #39ff14;
+    padding: 20px;
+    font-size: 15px;
+    white-space: pre-line;
+    line-height: 1.5;
+    border-radius: 6px;
+    text-align: left;
+    min-height: 220px;
+    position: relative;
+    font-family: 'Source Code Pro', monospace;
+    overflow-wrap: break-word;
+  }
+
+  a {
+    color: #39ff14;
+    text-decoration: underline;
+  }
+  a:hover {
+    color: #8cff66;
+  }
+  code {
+    background-color: #021214;
+    color: #39ff14;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    background-color: #39ff14;
+    margin-left: 2px;
+    animation: blink 1s steps(2, start) infinite;
+  }
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .typing {
+    border-right: 2px solid #39ff14;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    animation: typing 1.5s steps(40, end);
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  /* Style for the script link */
+  #runScript {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 25px;
+    border: 2px solid #39ff14;
+    border-radius: 6px;
+    color: #39ff14;
+    font-weight: 700;
+    text-decoration: none;
+    font-family: 'Source Code Pro', monospace;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  #runScript:hover {
+    background-color: #39ff14;
+    color: #0d1117;
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="mainContainer">
+  <div id="logo">ACH-033</div>
+  <h1>LINK INVESTIGATION <span class="cursor"></span></h1>
+
+  <ul>
+    <li><button onclick="showSection(1)">1. WHOIS - Find out who is behind the domain</button></li>
+    <li><button onclick="showSection(2)">2. DNS - See which IP address the domain points to</button></li>
+    <li><button onclick="showSection(3)">3. VISUAL ANALYSIS - See the website without visiting it directly</button></li>
+    <li><button onclick="showSection(4)">4. REPUTATION ANALYSIS – Is it reported by others?</button></li>
+    <li><button onclick="showSection(5)">5. DEEP INVESTIGATION - What services it exposes, what else is behind it</button></li>
+  </ul>
+
+  <div id="content" class="descripcion">
+    <p>Select a number to view the description and links.</p>
+  </div>
+
+  <a href="file:///Users/oscargonalonslopez/Desktop/ach033.command" id="runScript" download>
+    ▶ Run ACH-033 Terminal
+  </a>
+</div>
+
+<script>
+  const sections = {
+    1: {
+      title: "1. WHOIS - Find out who is behind the domain",
+      text: `<strong>Tools:</strong>
+- <a href="https://who.is" target="_blank" rel="noopener">https://who.is</a>
+- <a href="https://lnkd.in/dpmuJKCs" target="_blank" rel="noopener">https://lnkd.in/dpmuJKCs</a>
+- <a href="https://whoxy.com" target="_blank" rel="noopener">https://whoxy.com</a>
+
+Command <code>whois domain.com</code> in terminal
+
+<strong>What you can see:</strong>
+- Domain creation date
+- Registrar
+- Owner's data (if not hidden)
+- Registration location`
+    },
+    2: {
+      title: "2. DNS - See which IP address the domain points to",
+      text: `<strong>Tools:</strong>
+- <code>nslookup domain.com</code>
+- <a href="https://dnsdumpster.com" target="_blank" rel="noopener">https://dnsdumpster.com</a>
+- <a href="https://securitytrails.com" target="_blank" rel="noopener">https://securitytrails.com</a>
+
+<strong>What you can obtain:</strong>
+- IP address
+- Subdomains
+- Recent DNS changes
+- Hosting provider or CDN`
+    },
+    3: {
+      title: "3. VISUAL ANALYSIS - See the website without visiting it directly",
+      text: `<strong>Tools:</strong>
+- <a href="https://urlscan.io" target="_blank" rel="noopener">https://urlscan.io</a>
+- <a href="https://web.archive.org" target="_blank" rel="noopener">https://web.archive.org</a>
+
+<strong>What you can see:</strong>
+- Screenshots
+- Tracking codes
+- Active scripts
+- External resources`
+    },
+    4: {
+      title: "4. REPUTATION ANALYSIS – Is it reported by others?",
+      text: `<strong>Tools:</strong>
+- <a href="https://www.virustotal.com" target="_blank" rel="noopener">https://www.virustotal.com</a>
+- <a href="https://urlhaus.abuse.ch" target="_blank" rel="noopener">https://urlhaus.abuse.ch</a>
+- <a href="https://phishtank.org" target="_blank" rel="noopener">https://phishtank.org</a>
+
+<strong>What you can check:</strong>
+- If the domain is in blacklists
+- If antivirus engines detect it as malicious
+- If it has already been reported as phishing`
+    },
+    5: {
+      title: "5. DEEP INVESTIGATION - What services it exposes, what else is behind it",
+      text: `<strong>Tools:</strong>
+- <a href="https://shodan.io" target="_blank" rel="noopener">https://shodan.io</a>
+- <a href="https://censys.io" target="_blank" rel="noopener">https://censys.io</a>
+- <a href="https://crt.sh" target="_blank" rel="noopener">https://crt.sh</a>
+
+<strong>What you can discover:</strong>
+- Which ports are open
+- Associated SSL certificates
+- Other websites using the same server
+- If the server is misconfigured`
+    }
+  };
+
+  function showSection(num) {
+    const content = document.getElementById("content");
+    if (sections[num]) {
+      content.innerHTML = `<h2>${sections[num].title}</h2><pre class="typing">${sections[num].text}</pre>`;
+    } else {
+      content.innerHTML = "<p>Select a valid number.</p>";
+    }
+  }
+</script>
+
+</body>
+</html>
